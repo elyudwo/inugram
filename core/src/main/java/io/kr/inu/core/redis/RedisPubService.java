@@ -1,6 +1,5 @@
 package io.kr.inu.core.redis;
 
-import io.kr.inu.infra.redis.LikeDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -18,12 +17,7 @@ public class RedisPubService {
 
     public void pubMsgChannel(String channel, LikeRequestDto message) {
         redisMessageListenerContainer.addMessageListener(redisSubscribeListener, new ChannelTopic(channel));
-        LikeDto likeDto = LikeDto.builder()
-                        .userId(message.getUserId())
-                        .videoId(message.getVideoId())
-                        .build();
-
-        redisPublisher.publish(new ChannelTopic(channel), likeDto);
+        redisPublisher.publish(new ChannelTopic(channel), message.toLikeDto());
     }
 
     public void cancelSubChannel(String channel) {

@@ -31,7 +31,6 @@ public class RedisSubscribeListener implements MessageListener {
     public void onMessage(Message message, byte[] pattern) {
         try {
             String publishMessage = template.getStringSerializer().deserialize(message.getBody());
-
             LikeDto dto = objectMapper.readValue(publishMessage, LikeDto.class);
 
             log.info("Redis Subscribe Channel : " + dto.getUserId());
@@ -41,8 +40,8 @@ public class RedisSubscribeListener implements MessageListener {
             VideoEntity video = videoRepository.findById(dto.getVideoId()).orElseThrow();
             LikeEntity like = LikeEntity.builder()
                             .user(user)
-                                    .video(video)
-                                            .build();
+                            .video(video)
+                            .build();
             likeRepository.save(like);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage());

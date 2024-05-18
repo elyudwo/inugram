@@ -57,12 +57,12 @@ public class VideoService {
     private File extractThumbnail(MultipartFile videoFile) throws IOException {
         log.info("extractThumbnail 시1작");
         // local
-//        FFmpeg ffMpeg = new FFmpeg("C:\\ffmpeg\\bin\\ffmpeg");
-//        FFprobe ffProbe = new FFprobe("C:\\ffmpeg\\bin\\ffprobe");
+        FFmpeg ffMpeg = new FFmpeg("C:\\ffmpeg\\bin\\ffmpeg");
+        FFprobe ffProbe = new FFprobe("C:\\ffmpeg\\bin\\ffprobe");
 
         // ec2
-          FFmpeg ffMpeg = new FFmpeg("/usr/bin/ffmpeg-6.1-amd64-static/ffmpeg");
-          FFprobe ffProbe = new FFprobe("/usr/bin/ffmpeg-6.1-amd64-static/ffprobe");
+//          FFmpeg ffMpeg = new FFmpeg("/usr/bin/ffmpeg-6.1-amd64-static/ffmpeg");
+//          FFprobe ffProbe = new FFprobe("/usr/bin/ffmpeg-6.1-amd64-static/ffprobe");
 
 
         File outputThumbnailFile = File.createTempFile("temp_", ".jpg");
